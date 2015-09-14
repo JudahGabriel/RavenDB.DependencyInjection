@@ -1,0 +1,18 @@
+﻿{
+  "version": "1.0.0-beta1",
+  "description": "Dependency Injection extensions for using RavenDB with ASPNET 5.",
+  "authors": [ "Adam Rogers" ],
+  "tags": [ "RavenDB" ],
+  "projectUrl": "",
+  "licenseUrl": "http://www.gnu.org/licenses/gpl-3.0.en.html",
+
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {
+        "RavenDB.Client": "3.0.3785",
+        "Microsoft.Framework.DependencyInjection": "1.0.0-beta8-15565",
+        "Microsoft.Framework.Configuration": "1.0.0-beta8-15575"
+      }
+    }    
+  }
+}
