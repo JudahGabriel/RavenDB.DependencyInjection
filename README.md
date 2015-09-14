@@ -9,6 +9,7 @@ To use:
 
 2. Add this to your Startup.cs:
 
+```
 using Microsoft.AspNet.RavenDB;
 
 public void ConfigureServices(IServiceCollection services)
@@ -25,4 +26,5 @@ public void ConfigureServices(IServiceCollection services)
                 Database = "Default" 
             });
 
+```
 NOTE: You can simply call services.AddRaven() to use default "http://localhost:8080"
