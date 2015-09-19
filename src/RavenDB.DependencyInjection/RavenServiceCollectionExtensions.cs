@@ -13,7 +13,7 @@ namespace Microsoft.Framework.DependencyInjection
         public static RavenServicesBuilder AddRaven(
             this IServiceCollection serviceCollection)
         {
-            return serviceCollection.AddRaven(options: null);
+            return serviceCollection.AddRaven(new RavenOptions());
         }
         public static RavenServicesBuilder AddRaven(
             this IServiceCollection serviceCollection,
