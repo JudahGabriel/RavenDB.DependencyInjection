@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{070DCF9C-EE36-4EB4-BC51-4776D94C378F}"
 EndProject
@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RavenDB.DependencyInjection", "src\RavenDB.DependencyInjection\RavenDB.DependencyInjection.xproj", "{C38BECA0-0E51-4505-8D19-CDA8905E7312}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{CB5B75AF-2EDF-42F5-A2BB-DFA945372797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

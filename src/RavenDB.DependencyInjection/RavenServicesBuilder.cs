@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Framework.DependencyInjection
+﻿namespace Microsoft.Extensions.DependencyInjection
 {
     public class RavenServicesBuilder : IAccessor<IServiceCollection>
     {

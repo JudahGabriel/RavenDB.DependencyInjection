@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Raven.Client.Document;
 
-namespace Microsoft.Framework.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
     public class RavenOptions
     {

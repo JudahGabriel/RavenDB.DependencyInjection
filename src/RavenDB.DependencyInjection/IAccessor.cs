@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Framework.DependencyInjection
+﻿namespace Microsoft.Extensions.DependencyInjection
 {
     public interface IAccessor<out TService>
     {

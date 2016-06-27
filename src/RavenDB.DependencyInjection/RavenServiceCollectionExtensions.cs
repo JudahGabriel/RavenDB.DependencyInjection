@@ -1,8 +1,8 @@
-﻿using Microsoft.Framework.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Raven.Client;
 using Raven.Client.Document;
 
-namespace Microsoft.Framework.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class RavenServiceCollectionExtensions
     {
