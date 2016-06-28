@@ -1,7 +1,7 @@
 # RavenDB.DependencyInjection
-Dependency Injection extensions for using RavenDB with ASPNET 5.
+Dependency Injection extensions for using RavenDB with ASP.NET Core.
 
-The easy way to automatically inject your DocumentSession into your ASPNET 5 (vNext) project.
+The easy way to automatically inject your DocumentSession into your ASP.NET Core project.
 
 To use:
 
