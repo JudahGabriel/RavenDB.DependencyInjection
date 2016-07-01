@@ -7,13 +7,16 @@
   "licenseUrl": "http://www.gnu.org/licenses/gpl-3.0.en.html",
 
   "dependencies": {
-    "RavenDB.Client": "3.5.35130-Unstable",
-    "Microsoft.Extensions.DependencyInjection": "1.0.0",
-    "Microsoft.Extensions.Configuration": "1.0.0"
+    "RavenDB.Client": "3.5.35133-Unstable",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0"
   },
 
   "frameworks": {
-    "net451": {},
+    "net451": {
+      "dependencies": {
+        "System.Runtime": "4.0.10"
+      }
+    },
     "netstandard1.1": {
       "imports": "dnxcore50"
     }
