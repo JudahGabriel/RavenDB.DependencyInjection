@@ -7,6 +7,13 @@
     "projectUrl": "https://github.com/ar0311/RavenDB.DependencyInjection",
     "licenseUrl": "http://www.gnu.org/licenses/gpl-3.0.en.html"
   },
+  "configurations": {
+    "Release": {
+      "buildOptions": {
+        "optimize": true
+      }
+    }
+  },
   "dependencies": {
     "RavenDB.Client": "3.5.0-rc-*",
     "Microsoft.Extensions.DependencyInjection": "1.0.0"
