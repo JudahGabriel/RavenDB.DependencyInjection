@@ -3,7 +3,7 @@
   "description": "Dependency Injection extensions for using RavenDB with ASP.NET Core.",
   "authors": [ "Adam Rogers" ],
   "packOptions": {
-    "tags": [ "RavenDB", "ASP.NET", "Identity", "Core" ],
+    "tags": [ "RavenDB", ".NET", "ASP.NET", "Dependency", "Injection", "Core" ],
     "projectUrl": "https://github.com/ar0311/RavenDB.DependencyInjection",
     "licenseUrl": "http://www.gnu.org/licenses/gpl-3.0.en.html"
   },
