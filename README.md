@@ -1,28 +1,44 @@
-# RavenDB.DependencyInjection
-Dependency Injection extensions for using RavenDB with ASP.NET Core.
+﻿# RavenDB.AspNetCore.DependencyInjection
+Dependency Injection package for using RavenDB with ASP.NET Core.
 
-The easy way to automatically inject your DocumentSession into your ASP.NET Core project.
+This package lets you configure a RavenDB `DocumentStore` and create a singleton for it in the dependency injection container. Additionally, you can configure an `IAsyncDocumentSession` (or it's synchronous equivalent) to be created per scope.
 
-To use:
-
-1. Add reference to RavenDB.DependencyInjection in your project.json.
-
-2. Add this to your Startup.cs:
-
+## Getting Started:
+Install the [RavenDB.DI](https://www.nuget.org/packages/RavenDB.AspNetCore.DependencyInjection) library through [NuGet](https://nuget.org).
 ```
+    Install-Package RavenDB.DI
+```    
+
+## Usage:   
+
+Add a RavenSettings section to your appsettings.json:
+
+```json
+"RavenSettings": {
+    "Urls": [
+      "http://live-test.ravendb.net"
+    ],
+    "DatabaseName": "Demo",
+    "CertFilePath": "",
+    "CertPassword": ""
+  },
+```
+
+Note that CertFilePath is optional. If you use a certificate to connect to your database, this should be a path relative to the content root.
+
+Then in Startup.cs, tell Raven to use this database and add it to the DI container:
+
+```csharp
 public void ConfigureServices(IServiceCollection services)
-        {
-            // Add RavenDB services (IDocumentStore and IAsyncDocumentSession)
-            // to the services container.
-            services.AddRaven(new RavenOptions()
-            {
-                Url = "RavenDB server URL",
-                Conventions = new DocumentConvention()
-                {
-                    // Add conventions here if required
-                },
-                Database = "Default" 
-            });
+{
+    // 1. Grab our RavenSettings object from appsettings.json.
+    services.Configure<RavenSettings>(Configuration.GetSection("RavenSettings"));
 
+    // 2. Add an IDocumentStore singleton.
+    services.AddRavenDbDocStore();
+
+    // 3. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession().
+    services.AddRavenDbAsyncSession(); 
+}
 ```
-NOTE: You can simply call services.AddRaven() to use default "http://localhost:8080"
+Now you're cooking! Your controllers and services can now have IDocumentStore, IAsyncDocumentSession, or IDocumentSession injected into them. 😎
