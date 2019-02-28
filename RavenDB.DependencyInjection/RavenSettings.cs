@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Raven.DependencyInjection
 {
+    /// <summary>
+    /// Contains settings for RavenDB, such as the URL to the database.
+    /// </summary>
     public class RavenSettings
     {
         /// <summary>

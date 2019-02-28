@@ -1,4 +1,5 @@
 ﻿# RavenDB.DependencyInjection
+# ![RavenDB logo](https://github.com/JudahGabriel/RavenDB.DependencyInjection/blob/master/RavenDB.Identity/nuget-icon.png?raw=true =100x100) RavenDB.Identity #
 Dependency Injection package for using RavenDB with ASP.NET Core.
 
 This package lets you configure a RavenDB `DocumentStore` and create a singleton for it in the dependency injection container. Additionally, you can configure an `IAsyncDocumentSession` (or it's synchronous equivalent) to be created per scope.
