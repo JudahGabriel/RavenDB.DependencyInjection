@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>RavenDB.DependencyInjection.Extensions</RootNamespace>
+    <RootNamespace>RavenDB.DependencyInjection</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Judah Gabriel Himango</Authors>
     <Company>BitShuva</Company>
-    <Description>RavenDB.DependencyInjection.Extensions makes it easy to put your Raven DocumentStore and document session into AspNetCore's dependency injection container.</Description>
+    <Description>RavenDB.DependencyInjection makes it easy to put your Raven DocumentStore and document session into AspNetCore's dependency injection container.</Description>
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
     <PackageLicenseUrl>https://raw.githubusercontent.com/JudahGabriel/RavenDB.DependencyInjection/master/LICENSE</PackageLicenseUrl>
-    <PackageId>RavenDB.DependencyInjection.Extensions</PackageId>
-    <Product>RavenDB.DependencyInjection.Extensions</Product>
-    <AssemblyName>RavenDB.DependencyInjection.Extensions</AssemblyName>
+    <PackageId>RavenDB.DependencyInjection</PackageId>
+    <Product>RavenDB.DependencyInjection</Product>
+    <AssemblyName>RavenDB.DependencyInjection</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

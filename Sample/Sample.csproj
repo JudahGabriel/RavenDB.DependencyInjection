@@ -13,7 +13,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\RavneDB.DependencyInjection\RavenDB.DependencyInjection.csproj" />
+    <ProjectReference Include="..\RavenDB.DependencyInjection\RavenDB.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>
