@@ -36,12 +36,30 @@ namespace Raven.DependencyInjection
         ///     </code>
         /// </example>
         /// <param name="serviceCollection"> The <see cref="IServiceCollection" /> to add services to. </param>
-        /// <remarks>Based on code from https://github.com/maqduni/AspNetCore.Identity.RavenDb/blob/master/src/Maqduni.AspNetCore.Identity.RavenDb/RavenDbServiceCollectionExtensions.cs</remarks>
         /// <returns>The same service collection so that multiple calls can be chained.</returns>
         public static IServiceCollection AddRavenDbAsyncSession(this IServiceCollection serviceCollection)
         {
             return serviceCollection.AddScoped(provider => 
                 provider.GetRequiredService<IDocumentStore>().OpenAsyncSession());
+        }
+
+        /// <summary>
+        /// Registers a RavenDB <see cref="IAsyncDocumentSession"/> to be created and disposed on each request.
+        /// </summary>
+        /// <example>
+        ///     <code>
+        ///         public void ConfigureServices(IServiceCollection services) 
+        ///         {
+        ///             services.AddRavenDbAsyncSession(docStore);
+        ///         }
+        ///     </code>
+        /// </example>
+        /// <param name="serviceCollection"> The <see cref="IServiceCollection" /> to add services to. </param>
+        /// <param name="docStore">The <see cref="IDocumentStore"/> to use in creating the session.</param>
+        /// <returns>The same service collection so that multiple calls can be chained.</returns>
+        public static IServiceCollection AddRavenDbAsyncSession(this IServiceCollection serviceCollection, IDocumentStore docStore)
+        {
+            return serviceCollection.AddScoped(_ => docStore.OpenAsyncSession());
         }
 
         /// <summary>
@@ -62,6 +80,25 @@ namespace Raven.DependencyInjection
         {
             return serviceCollection.AddScoped(provider => 
                 provider.GetRequiredService<IDocumentStore>().OpenSession());
+        }
+
+        /// <summary>
+        /// Registers a RavenDB <see cref="IDocumentSession"/> to be created and disposed on each request. 
+        /// </summary>
+        /// <example>
+        ///     <code>
+        ///         public void ConfigureServices(IServiceCollection services) 
+        ///         {
+        ///             services.AddRavenDbAsyncSession();
+        ///         }
+        ///     </code>
+        /// </example>
+        /// <param name="serviceCollection"> The <see cref="IServiceCollection" /> to add services to. </param>
+        /// <param name="docStore">The <see cref="IDocumentStore"/> to use to create the <see cref="IDocumentSession"/></param>
+        /// <returns>The same service collection so that multiple calls can be chained.</returns>
+        public static IServiceCollection AddRavenDbSession(this IServiceCollection serviceCollection, IDocumentStore docStore)
+        {
+            return serviceCollection.AddScoped(_ => docStore.OpenSession());
         }
 
         private static IDocumentStore CreateDocStore(IServiceProvider svcProvider)
