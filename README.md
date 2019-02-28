@@ -6,7 +6,7 @@ This package lets you configure a RavenDB `DocumentStore` and create a singleton
 ## Getting Started:
 Install the [RavenDB.DependencyInjection](https://www.nuget.org/packages/RavenDB.DependencyInjection) library through [NuGet](https://nuget.org).
 ```
-    Install-Package RavenDB.DependencyInjection
+Install-Package RavenDB.DependencyInjection
 ```    
 
 ## Usage:   
@@ -15,13 +15,13 @@ Add a RavenSettings section to your appsettings.json:
 
 ```json
 "RavenSettings": {
-    "Urls": [
-      "http://live-test.ravendb.net"
-    ],
-    "DatabaseName": "Northwind",
-    "CertFilePath": "",
-    "CertPassword": ""
-  },
+	"Urls": [
+		"http://live-test.ravendb.net"
+	],
+	"DatabaseName": "Northwind",
+	"CertFilePath": "",
+	"CertPassword": ""
+},
 ```
 
 Note that CertFilePath is optional. If you use a certificate to connect to your database, this should be a path relative to the content root.
@@ -41,6 +41,6 @@ public void ConfigureServices(IServiceCollection services)
     services.AddRavenDbAsyncSession(); 
 }
 ```
-Now you're cooking! Your controllers and services can now have IDocumentStore, IAsyncDocumentSession, or IDocumentSession injected into them. 😎
+Now you're cooking! Your controllers and services can now have `IDocumentStore`, `IAsyncDocumentSession`, or `IDocumentSession` injected into them. 😎
 
 View the [Sample project](https://github.com/JudahGabriel/RavenDB.DependencyInjection/tree/master/Sample) to see it all in action.
