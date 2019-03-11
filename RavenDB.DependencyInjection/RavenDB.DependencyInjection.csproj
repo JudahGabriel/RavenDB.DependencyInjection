@@ -9,7 +9,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Title>RavenDB Dependency Injection</Title>
     <Description>RavenDB.DependencyInjection makes it easy to put your Raven doc store and document session into AspNetCore's dependency injection container.</Description>
-    <PackageReleaseNotes>Overloads to AddRavenDbSession to accept existing DocumentStore.</PackageReleaseNotes>
+    <PackageReleaseNotes>Overload to document store creation to configure doc store before initialization.</PackageReleaseNotes>
     <PackageLicenseUrl>https://raw.githubusercontent.com/JudahGabriel/RavenDB.DependencyInjection/master/LICENSE</PackageLicenseUrl>
     <PackageId>RavenDB.DependencyInjection</PackageId>
     <Product>RavenDB.DependencyInjection</Product>
@@ -19,7 +19,8 @@
     <PackageProjectUrl />
     <RepositoryUrl>https://github.com/JudahGabriel/RavenDB.DependencyInjection</RepositoryUrl>
     <PackageTags>ravendb dependency-injection di aspnetcore nosql</PackageTags>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
+    <AssemblyVersion>2.0.2.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

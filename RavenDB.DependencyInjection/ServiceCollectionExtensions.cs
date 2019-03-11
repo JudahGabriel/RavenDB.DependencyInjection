@@ -20,8 +20,20 @@ namespace Raven.DependencyInjection
         /// <returns>The dependency injection services.</returns>
         public static IServiceCollection AddRavenDbDocStore(this IServiceCollection svc)
         {
-            return svc.AddSingleton(provider => CreateDocStore(provider));
-        } 
+            return svc.AddSingleton(provider => CreateDocStore(provider, null));
+        }
+
+        /// <summary>
+        /// Adds a Raven <see cref="IDocumentStore"/> singleton to the dependency injection services. 
+        /// The document store is configured using a <see cref="RavenSettings"/> section in your appsettings.json file.
+        /// </summary>
+        /// <param name="svc">The dependency injection services.</param>
+        /// <param name="configure">A method that will be used to configure the document store.</param>
+        /// <returns>The dependency injection services.</returns>
+        public static IServiceCollection AddRavenDbDocStore(this IServiceCollection svc, Action<IDocumentStore> configure)
+        {
+            return svc.AddSingleton(provider => CreateDocStore(provider, configure));
+        }
 
         /// <summary>
         /// Registers a RavenDB <see cref="IAsyncDocumentSession"/> to be created and disposed on each request. 
@@ -101,7 +113,7 @@ namespace Raven.DependencyInjection
             return serviceCollection.AddScoped(_ => docStore.OpenSession());
         }
 
-        private static IDocumentStore CreateDocStore(IServiceProvider svcProvider)
+        private static IDocumentStore CreateDocStore(IServiceProvider svcProvider, Action<IDocumentStore> configure)
         {
             var settings = svcProvider.GetRequiredService<IOptions<RavenSettings>>().Value;
 
@@ -135,6 +147,8 @@ namespace Raven.DependencyInjection
 
                 docStore.Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(certFilePath, settings.CertPassword);
             }
+
+            configure?.Invoke(docStore);
 
             docStore.Initialize();
             return docStore;
