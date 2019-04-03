@@ -16,7 +16,6 @@ namespace RavenDB.DI.Sample.Pages
 
         public void OnGet()
         {
-
         }
     }
 }
