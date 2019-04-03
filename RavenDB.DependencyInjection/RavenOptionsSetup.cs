@@ -62,12 +62,13 @@ namespace Raven.DependencyInjection
         /// <param name="options"></param>
         public void PostConfigure(string name, RavenOptions options)
         {
+            _options = options;
+
             if (options.Certificate == null)
             {
                 options.Certificate = GetCertificate();
+                _options.Certificate = options.Certificate;
             }
-
-            _options = options;
 
             if (options.GetDocumentStore == null)
             {
