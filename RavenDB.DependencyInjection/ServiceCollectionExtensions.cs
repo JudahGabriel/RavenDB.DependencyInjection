@@ -19,24 +19,7 @@ namespace Raven.DependencyInjection
         /// <returns>The dependency injection services.</returns>
         public static IServiceCollection AddRavenDbDocStore(this IServiceCollection services)
         {
-            return services.AddRavenDbDocStore(options: options => { });
-        }
-
-        /// <summary>
-        /// Adds a Raven <see cref="IDocumentStore"/> singleton to the dependency injection services.
-        /// The document store is configured using a <see cref="RavenSettings"/> section in your appsettings.json file.
-        /// </summary>
-        /// <param name="services">The dependency injection services.</param>
-        /// <param name="configure">A method that will be used to configure the document store.</param>
-        /// <returns>The dependency injection services.</returns>
-        public static IServiceCollection AddRavenDbDocStore(
-            this IServiceCollection services,
-            Action<IDocumentStore> configure)
-        {
-            return services.AddRavenDbDocStore(options: options =>
-            {
-                options.ConfigureDocumentStore = configure;
-            });
+            return services.AddRavenDbDocStore(options => { });
         }
 
         /// <summary>
@@ -51,14 +34,11 @@ namespace Raven.DependencyInjection
             Action<RavenOptions> options)
         {
             services.ConfigureOptions<RavenOptionsSetup>();
-
             services.Configure(options);
-
             services.AddSingleton(sp =>
             {
                 var setup = sp.GetRequiredService<IOptions<RavenOptions>>().Value;
-
-                return setup.GetDocumentStore(setup.ConfigureDocumentStore);
+                return setup.GetDocumentStore(setup.BeforeInitializeDocStore);
             });
 
             return services;
@@ -143,6 +123,5 @@ namespace Raven.DependencyInjection
         {
             return services.AddScoped(_ => docStore.OpenSession());
         }
-
     }
 }

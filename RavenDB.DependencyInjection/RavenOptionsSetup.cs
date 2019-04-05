@@ -39,7 +39,7 @@ namespace Raven.DependencyInjection
             if (options.Settings == null)
             {
                 var settings = new RavenSettings();
-                _configuration.Bind(options.SectionName,settings);
+                _configuration.Bind(options.SectionName, settings);
 
                 options.Settings = settings;
             }
@@ -53,7 +53,7 @@ namespace Raven.DependencyInjection
             {
                 options.GetConfiguration = _configuration;
             }
-          }
+        }
 
         /// <summary>
         /// Post configuration for <see cref="RavenOptions"/>.
@@ -66,7 +66,7 @@ namespace Raven.DependencyInjection
 
             if (options.Certificate == null)
             {
-                options.Certificate = GetCertificate();
+                options.Certificate = GetCertificateFromFileSystem();
                 _options.Certificate = options.Certificate;
             }
 
@@ -105,7 +105,7 @@ namespace Raven.DependencyInjection
             return documentStore;
         }
 
-        private X509Certificate2 GetCertificate()
+        private X509Certificate2 GetCertificateFromFileSystem()
         {
             var certRelativePath = _options.Settings.CertFilePath;
 

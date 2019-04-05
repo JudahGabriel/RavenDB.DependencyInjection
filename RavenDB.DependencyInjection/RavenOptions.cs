@@ -46,8 +46,17 @@ namespace Raven.DependencyInjection
         public Func<Action<IDocumentStore>, IDocumentStore> GetDocumentStore { get; set; }
 
         /// <summary>
-        /// Configures <see cref="IDocumentStore"/>.
+        /// Action executed on the document store prior to calling docStore.Initialize(...). 
+        /// This should be used to configure RavenDB conventions.
         /// </summary>
-        public Action<IDocumentStore> ConfigureDocumentStore { get; set; }
+        /// <example>
+        ///     <code>
+        ///         services.AddRavenDbDocStore(options =>
+        ///         {
+        ///             options.BeforeInitializeDocStore = docStore => docStore.Conventions.IdentityPartsSeparator = "-";
+        ///         }
+        ///     </code>
+        /// </example>
+        public Action<IDocumentStore> BeforeInitializeDocStore { get; set; }
     }
 }

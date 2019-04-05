@@ -37,11 +37,11 @@ namespace RavenDB.DI.Sample
             // Configure Raven in 2 steps:
 
             // 1. Add an IDocumentStore singleton.
-            services.AddRavenDbDocStore();
+            services.AddRavenDbDocStore(); // Configures Raven using the settings in appsettings.json.
 
             // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
             services.AddRavenDbAsyncSession();
-
+            
             // For demo purposes, create an OrderService. We'll use it in the UI, see Index.cshtml
             services.AddScoped<OrderService>();
 

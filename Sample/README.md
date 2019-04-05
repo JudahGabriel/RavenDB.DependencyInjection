@@ -23,13 +23,10 @@ The [appsettings.json](https://github.com/JudahGabriel/RavenDB.DependencyInjecti
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    // 1. Grab our RavenSettings object from appsettings.json.
-    services.Configure<RavenSettings>(Configuration.GetSection("RavenSettings"));
-
-    // 2. Add an IDocumentStore singleton.
+    // 1. Add an IDocumentStore singleton.
     services.AddRavenDbDocStore();
 
-    // 3. Optional: Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession().
+    // 2. Optional: Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession().
     services.AddRavenDbAsyncSession(); 
 }
 ```
