@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Raven.DependencyInjection;
 using RavenDB.DI.Sample.Services;
 
@@ -33,15 +34,12 @@ namespace RavenDB.DI.Sample
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            // Configure Raven in 3 steps:
+            // Configure Raven in 2 steps:
 
-            // 1. Grab our RavenSettings object from appsettings.json.
-            services.Configure<RavenSettings>(Configuration.GetSection("RavenSettings"));
-
-            // 2. Add an IDocumentStore singleton.
+            // 1. Add an IDocumentStore singleton.
             services.AddRavenDbDocStore();
 
-            // 3. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
+            // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
             services.AddRavenDbAsyncSession();
 
             // For demo purposes, create an OrderService. We'll use it in the UI, see Index.cshtml
