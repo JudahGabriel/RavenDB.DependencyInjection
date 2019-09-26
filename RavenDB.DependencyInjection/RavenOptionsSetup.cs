@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Raven.Client.Documents;
 using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+
+#if NETCOREAPP3_0
+using Microsoft.Extensions.Hosting;
+#elif NETSTANDARD2_0
+using Microsoft.AspNetCore.Hosting;
+#endif
 
 namespace Raven.DependencyInjection
 {
@@ -13,7 +18,13 @@ namespace Raven.DependencyInjection
     /// </summary>
     public class RavenOptionsSetup : IConfigureOptions<RavenOptions>, IPostConfigureOptions<RavenOptions>
     {
+
+#if NETCOREAPP3_0
+        private readonly IHostEnvironment _hosting;
+#elif NETSTANDARD2_0
         private readonly IHostingEnvironment _hosting;
+#endif
+
         private readonly IConfiguration _configuration;
         private RavenOptions _options;
 
@@ -22,9 +33,12 @@ namespace Raven.DependencyInjection
         /// </summary>
         /// <param name="hosting"></param>
         /// <param name="configuration"></param>
-        public RavenOptionsSetup(
-            IHostingEnvironment hosting,
-            IConfiguration configuration)
+#if NETCOREAPP3_0
+        public RavenOptionsSetup(IHostEnvironment hosting, IConfiguration configuration)
+#elif NETSTANDARD2_0
+        public RavenOptionsSetup(IHostingEnvironment hosting, IConfiguration configuration)
+#endif
+        
         {
             _hosting = hosting;
             _configuration = configuration;
