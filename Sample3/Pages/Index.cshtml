@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@inject Services.OrderService orderSvc
+
+<div class="text-center">
+    <div class="jumbotron">
+        <h1 class="display-4">
+            Welcome to RavenDB Dependency Injection
+        </h1>
+        <p class="lead">
+            Here is some sample data loaded from the database: 
+            <br />
+            There are <strong>@await orderSvc.GetOrderCount()</strong> orders in the database 😎
+        </p>
+        <hr class="my-4">
+        <p>Setting up Raven dependency injection takes only 3 lines of code.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
+</div>
