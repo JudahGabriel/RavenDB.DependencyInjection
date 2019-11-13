@@ -8,21 +8,22 @@
     <Company>BitShuva</Company>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>nuget-icon.png</PackageIcon>
 
     <Title>RavenDB Dependency Injection</Title>
     <Description>RavenDB.DependencyInjection makes it easy to put your Raven doc store and document session into AspNetCore's dependency injection container.</Description>
     <PackageReleaseNotes>Added ability to configure certificate from external storage.</PackageReleaseNotes>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/JudahGabriel/RavenDB.DependencyInjection/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageId>RavenDB.DependencyInjection</PackageId>
     <Product>RavenDB.DependencyInjection</Product>
     <RepositoryType>git</RepositoryType>
     <AssemblyName>RavenDB.DependencyInjection</AssemblyName>
-    <PackageIconUrl>https://raw.githubusercontent.com/JudahGabriel/RavenDB.DependencyInjection/master/RavenDB.DependencyInjection/nuget-icon.png</PackageIconUrl>
     <PackageProjectUrl />
     <RepositoryUrl>https://github.com/JudahGabriel/RavenDB.DependencyInjection</RepositoryUrl>
     <PackageTags>ravendb dependency-injection di aspnetcore nosql</PackageTags>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
     <PackageReference Include="RavenDB.Client" Version="4.2.4" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
+    <None Include="nuget-icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 
   <PropertyGroup Label="SourceLink Settings">
