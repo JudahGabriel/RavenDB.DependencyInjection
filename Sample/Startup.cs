@@ -4,16 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 using Raven.DependencyInjection;
-using RavenDB.DI.Sample.Services;
+using Sample.Services;
 
-namespace RavenDB.DI.Sample
+namespace Sample
 {
     public class Startup
     {
@@ -27,29 +25,19 @@ namespace RavenDB.DI.Sample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             // Configure Raven in 2 steps:
+            services
+                .AddRavenDbDocStore() // 1. Configures Raven connection using the settings in appsettings.json.
+                .AddRavenDbAsyncSession(); // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
 
-            // 1. Add an IDocumentStore singleton.
-            services.AddRavenDbDocStore(); // Configures Raven using the settings in appsettings.json.
-
-            // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
-            services.AddRavenDbAsyncSession();
-            
             // For demo purposes, create an OrderService. We'll use it in the UI, see Index.cshtml
             services.AddScoped<OrderService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -64,9 +52,15 @@ namespace RavenDB.DI.Sample
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+            });
         }
     }
 }

@@ -4,18 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Raven.Client.Documents.Session;
+using Microsoft.Extensions.Logging;
 
-namespace RavenDB.DI.Sample.Pages
+namespace Sample.Pages
 {
     public class IndexModel : PageModel
     {
-        public IndexModel()
+        private readonly ILogger<IndexModel> _logger;
+
+        public IndexModel(ILogger<IndexModel> logger)
         {
+            _logger = logger;
         }
 
         public void OnGet()
         {
+
         }
     }
 }

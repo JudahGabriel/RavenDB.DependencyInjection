@@ -1,12 +1,12 @@
 ﻿using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
-using RavenDB.DI.Sample.Models;
+using Sample.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RavenDB.DI.Sample.Services
+namespace Sample.Services
 {
     public class OrderService
     {
