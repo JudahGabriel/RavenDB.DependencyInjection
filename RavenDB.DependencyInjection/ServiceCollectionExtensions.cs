@@ -33,8 +33,8 @@ namespace Raven.DependencyInjection
             this IServiceCollection services,
             Action<RavenOptions> options)
         {
-            services.ConfigureOptions<RavenOptionsSetup>();
             services.Configure(options);
+            services.ConfigureOptions<RavenOptionsSetup>();
             services.AddSingleton(sp =>
             {
                 var setup = sp.GetRequiredService<IOptions<RavenOptions>>().Value;
