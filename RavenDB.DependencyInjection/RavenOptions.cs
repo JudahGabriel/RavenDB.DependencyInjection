@@ -58,5 +58,19 @@ namespace Raven.DependencyInjection
         ///     </code>
         /// </example>
         public Action<IDocumentStore> BeforeInitializeDocStore { get; set; }
+
+        /// <summary>
+        /// Action executed on the document store after calling docStore.Initialize(...).
+        /// This should be used to register indexes.
+        /// </summary>
+        /// <example>
+        ///     <code>
+        ///         services.AddRavenDbDocStore(options =>
+        ///         {
+        ///             options.AfterInitializeDocStore = docStore => IndexCreation.CreateIndexes(Assembly.GetExecutingAssembly(), docStore);
+        ///         }
+        ///     </code>
+        /// </example>
+        public Action<IDocumentStore> AfterInitializeDocStore { get; set; }
     }
 }
