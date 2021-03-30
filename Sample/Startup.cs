@@ -32,7 +32,6 @@ namespace Sample
                     // By default, the settings will be pulled from a "RavenSettings" section in your appsettings.json
                     // You can override this like so: 
                     // options.SectionName = "ravendb";
-
                 }) 
                 .AddRavenDbAsyncSession(); // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
 
