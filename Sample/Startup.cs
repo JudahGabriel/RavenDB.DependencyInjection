@@ -27,10 +27,13 @@ namespace Sample
         {
             // Configure Raven in 2 steps:
             services
-                .AddRavenDbDocStore(options =>
+                .AddRavenDbDocStore(options => // 1. Configures Raven connection using the settings in appsettings.json.
                 {
-                    options.SectionName = "ravendb";
-                }) // 1. Configures Raven connection using the settings in appsettings.json.
+                    // By default, the settings will be pulled from a "RavenSettings" section in your appsettings.json
+                    // You can override this like so: 
+                    // options.SectionName = "ravendb";
+
+                }) 
                 .AddRavenDbAsyncSession(); // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
 
             // For demo purposes, create an OrderService. We'll use it in the UI, see Index.cshtml
