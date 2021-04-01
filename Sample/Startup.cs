@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Raven.Client.Documents;
 using Raven.DependencyInjection;
+using Sample.Common;
 using Sample.Services;
 
 namespace Sample
@@ -66,6 +68,10 @@ namespace Sample
             {
                 endpoints.MapRazorPages();
             });
+
+            // Create the database if it doesn't exist.
+            var docStore = app.ApplicationServices.GetRequiredService<IDocumentStore>();
+            docStore.EnsureExists();
         }
     }
 }

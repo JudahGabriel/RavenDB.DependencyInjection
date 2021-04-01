@@ -12,7 +12,7 @@
 
     <Title>RavenDB Dependency Injection</Title>
     <Description>RavenDB.DependencyInjection makes it easy to put your Raven doc store and document session into AspNetCore's dependency injection container.</Description>
-    <PackageReleaseNotes>Allowing override of Raven settings section name in appsettings.json</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed null reference bug where AfterInitializeDocStore is not set. Added nullable annotations.</PackageReleaseNotes>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageId>RavenDB.DependencyInjection</PackageId>
     <Product>RavenDB.DependencyInjection</Product>
@@ -21,9 +21,10 @@
     <PackageProjectUrl />
     <RepositoryUrl>https://github.com/JudahGabriel/RavenDB.DependencyInjection</RepositoryUrl>
     <PackageTags>ravendb dependency-injection di aspnetcore nosql</PackageTags>
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

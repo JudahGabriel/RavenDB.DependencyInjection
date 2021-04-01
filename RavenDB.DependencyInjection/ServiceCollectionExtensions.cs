@@ -38,8 +38,8 @@ namespace Raven.DependencyInjection
             services.AddSingleton(sp =>
             {
                 var setup = sp.GetRequiredService<IOptions<RavenOptions>>().Value;
-                var docStore = setup.GetDocumentStore(setup.BeforeInitializeDocStore);
-                setup.AfterInitializeDocStore(docStore);
+                var docStore = setup.GetDocumentStore!(setup.BeforeInitializeDocStore);
+                setup.AfterInitializeDocStore?.Invoke(docStore);
                 return docStore;
             });
 

@@ -15,7 +15,7 @@ namespace Raven.DependencyInjection
     {
         private readonly IHostingEnvironment _hosting;
         private readonly IConfiguration _configuration;
-        private RavenOptions _options;
+        private RavenOptions? _options;
 
         /// <summary>
         /// The constructor for <see cref="RavenOptionsSetup"/>.
@@ -76,9 +76,9 @@ namespace Raven.DependencyInjection
             }
         }
 
-        private IDocumentStore GetDocumentStore(Action<IDocumentStore> configureDbStore)
+        private IDocumentStore GetDocumentStore(Action<IDocumentStore>? configureDbStore)
         {
-            if (string.IsNullOrEmpty(_options.Settings.DatabaseName))
+            if (string.IsNullOrEmpty(_options?.Settings?.DatabaseName))
             {
                 throw new InvalidOperationException("You haven't configured a DatabaseName. Ensure your appsettings.json contains a RavenSettings section.");
             }
@@ -105,19 +105,19 @@ namespace Raven.DependencyInjection
             return documentStore;
         }
 
-        private X509Certificate2 GetCertificateFromFileSystem()
+        private X509Certificate2? GetCertificateFromFileSystem()
         {
-            var certRelativePath = _options.Settings.CertFilePath;
+            var certRelativePath = _options?.Settings?.CertFilePath;
 
             if (!string.IsNullOrEmpty(certRelativePath))
             {
-                var certFilePath = Path.Combine(_options.GetHostingEnvironment.ContentRootPath, certRelativePath);
+                var certFilePath = Path.Combine(_options?.GetHostingEnvironment?.ContentRootPath, certRelativePath);
                 if (!File.Exists(certFilePath))
                 {
                     throw new InvalidOperationException($"The Raven certificate file, {certRelativePath} is missing. Expected it at {certFilePath}.");
                 }
 
-                return new X509Certificate2(certFilePath, _options.Settings.CertPassword);
+                return new X509Certificate2(certFilePath, _options?.Settings?.CertPassword);
             }
 
             return null;
