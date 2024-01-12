@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Raven.DependencyInjection
@@ -11,7 +11,7 @@ namespace Raven.DependencyInjection
         /// <summary>
         /// The URLs where the database resides.
         /// </summary>
-        public string[] Urls { get; set; } = new string[] { };
+        public string[] Urls { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// The name of the database.

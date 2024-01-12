@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenDB.DependencyInjection", "RavenDB.DependencyInjection\RavenDB.DependencyInjection.csproj", "{359AC0BD-D159-48A3-9067-03FFAD094BEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenDB.DependencyInjection", "RavenDB.DependencyInjection\RavenDB.DependencyInjection.csproj", "{359AC0BD-D159-48A3-9067-03FFAD094BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{DB60FEEE-ACBA-4EEF-99CB-C315A8FA085D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csproj", "{DB60FEEE-ACBA-4EEF-99CB-C315A8FA085D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C63F42E8-415C-4887-A6DC-C57DDB37F96C}"
 	ProjectSection(SolutionItems) = preProject

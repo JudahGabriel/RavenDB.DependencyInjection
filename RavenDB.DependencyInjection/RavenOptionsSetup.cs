@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Raven.Client.Documents;
 using System;
@@ -13,9 +13,9 @@ namespace Raven.DependencyInjection
     /// </summary>
     public class RavenOptionsSetup : IConfigureOptions<RavenOptions>, IPostConfigureOptions<RavenOptions>
     {
-        private readonly IHostingEnvironment _hosting;
-        private readonly IConfiguration _configuration;
-        private RavenOptions? _options;
+        private readonly IHostEnvironment host;
+        private readonly IConfiguration config;
+        private RavenOptions? options;
 
         /// <summary>
         /// The constructor for <see cref="RavenOptionsSetup"/>.
@@ -23,11 +23,11 @@ namespace Raven.DependencyInjection
         /// <param name="hosting"></param>
         /// <param name="configuration"></param>
         public RavenOptionsSetup(
-            IHostingEnvironment hosting,
+            IHostEnvironment hosting,
             IConfiguration configuration)
         {
-            _hosting = hosting;
-            _configuration = configuration;
+            host = hosting;
+            config = configuration;
         }
 
         /// <summary>
@@ -39,19 +39,19 @@ namespace Raven.DependencyInjection
             if (options.Settings == null)
             {
                 var settings = new RavenSettings();
-                _configuration.Bind(options.SectionName, settings);
+                config.Bind(options.SectionName, settings);
 
                 options.Settings = settings;
             }
 
-            if (options.GetHostingEnvironment == null)
+            if (options.HostEnvironment == null)
             {
-                options.GetHostingEnvironment = _hosting;
+                options.HostEnvironment = host;
             }
 
             if (options.GetConfiguration == null)
             {
-                options.GetConfiguration = _configuration;
+                options.GetConfiguration = config;
             }
         }
 
@@ -60,14 +60,14 @@ namespace Raven.DependencyInjection
         /// </summary>
         /// <param name="name"></param>
         /// <param name="options"></param>
-        public void PostConfigure(string name, RavenOptions options)
+        public void PostConfigure(string? name, RavenOptions options)
         {
-            _options = options;
+            this.options = options;
 
             if (options.Certificate == null)
             {
                 options.Certificate = GetCertificateFromFileSystem();
-                _options.Certificate = options.Certificate;
+                this.options.Certificate = options.Certificate;
             }
 
             if (options.GetDocumentStore == null)
@@ -78,24 +78,24 @@ namespace Raven.DependencyInjection
 
         private IDocumentStore GetDocumentStore(Action<IDocumentStore>? configureDbStore)
         {
-            if (string.IsNullOrEmpty(_options?.Settings?.DatabaseName))
+            if (string.IsNullOrEmpty(options?.Settings?.DatabaseName))
             {
                 throw new InvalidOperationException("You haven't configured a DatabaseName. Ensure your appsettings.json contains a RavenSettings section.");
             }
-            if (_options.Settings.Urls == null || _options.Settings.Urls.Length == 0)
+            if (options.Settings.Urls == null || options.Settings.Urls.Length == 0)
             {
                 throw new InvalidOperationException("You haven't configured your Raven database URLs. Ensure your appsettings.json contains a RavenSettings section.");
             }
 
             var documentStore = new DocumentStore
             {
-                Urls = _options.Settings.Urls,
-                Database = _options.Settings.DatabaseName
+                Urls = options.Settings.Urls,
+                Database = options.Settings.DatabaseName
             };
 
-            if (_options.Certificate != null)
+            if (options.Certificate != null)
             {
-                documentStore.Certificate = _options.Certificate;
+                documentStore.Certificate = options.Certificate;
             }
 
             configureDbStore?.Invoke(documentStore);
@@ -107,17 +107,17 @@ namespace Raven.DependencyInjection
 
         private X509Certificate2? GetCertificateFromFileSystem()
         {
-            var certRelativePath = _options?.Settings?.CertFilePath;
+            var certRelativePath = options?.Settings?.CertFilePath;
 
             if (!string.IsNullOrEmpty(certRelativePath))
             {
-                var certFilePath = Path.Combine(_options?.GetHostingEnvironment?.ContentRootPath, certRelativePath);
+                var certFilePath = Path.Combine(options?.HostEnvironment?.ContentRootPath ?? string.Empty, certRelativePath);
                 if (!File.Exists(certFilePath))
                 {
                     throw new InvalidOperationException($"The Raven certificate file, {certRelativePath} is missing. Expected it at {certFilePath}.");
                 }
 
-                return new X509Certificate2(certFilePath, _options?.Settings?.CertPassword);
+                return new X509Certificate2(certFilePath, options?.Settings?.CertPassword);
             }
 
             return null;
